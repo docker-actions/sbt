@@ -10,7 +10,7 @@ ENV BUILD_DEBS /build/debs
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Build pre-requisites
-RUN bash -c 'mkdir -p ${BUILD_DEBS} ${ROOTFS}/opt'
+RUN bash -c 'mkdir -p ${BUILD_DEBS} ${ROOTFS}/{usr/local/bin,opt}'
 
 # Fix permissions
 RUN chown -Rv 100:root $BUILD_DEBS
