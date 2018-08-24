@@ -42,6 +42,14 @@ RUN cd ${ROOTFS}/opt \
   && rm -f sbt.tar.gz \
   && ln -s /opt/sbt/bin/sbt ${ROOTFS}/usr/bin/sbt
 
+# Move /sbin out of the way
+RUN mv ${ROOTFS}/sbin ${ROOTFS}/sbin.orig \
+      && mkdir -p ${ROOTFS}/sbin \
+      && for b in ${ROOTFS}/sbin.orig/*; do \
+           echo 'cmd=$(basename ${BASH_SOURCE[0]}); exec /sbin.orig/$cmd "$@"' > ${ROOTFS}/sbin/$(basename $b); \
+           chmod +x ${ROOTFS}/sbin/$(basename $b); \
+         done
+
 COPY entrypoint.sh ${ROOTFS}/usr/local/bin/entrypoint.sh
 RUN chmod +x ${ROOTFS}/usr/local/bin/entrypoint.sh
 
