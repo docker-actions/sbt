@@ -53,7 +53,7 @@ RUN mv ${ROOTFS}/sbin ${ROOTFS}/sbin.orig \
 COPY entrypoint.sh ${ROOTFS}/usr/local/bin/entrypoint.sh
 RUN chmod +x ${ROOTFS}/usr/local/bin/entrypoint.sh
 
-FROM actions/java:8u181-jdk-4
+FROM actions/java:8u181-jdk-6
 LABEL maintainer = "ilja+docker@bobkevic.com"
 
 ARG ROOTFS=/build/rootfs
